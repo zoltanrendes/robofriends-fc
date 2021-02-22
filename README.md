@@ -1,6 +1,6 @@
 # Robofriends Application FC
 
-This is an altereed version of the great Robofriends tutorial project at https://aneagoie.github.io/robofriends
+This is an altered version of the great Robofriends tutorial project at https://aneagoie.github.io/robofriends
 
 The differences are:
 
