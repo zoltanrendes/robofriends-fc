@@ -1,13 +1,21 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import fetchMock from 'fetch-mock-jest';
 
 import { App } from './App';
 import { mockStore, TestProvider } from './TestUtils';
+
 import { IStore } from './models/Store';
-import { fetchResult } from './mocks/mockFetchResult';
+import { mockFetchResult } from './mocks/mockFetchResult';
 import { API_LINK } from './redux/ducks/actions';
 
+const data: IStore = {
+    searchRobots: {
+        isPending: false,
+        robots: mockFetchResult,
+        searchField: '',
+    },
+};
 describe('App.tsx', () => {
     afterAll(() => {
         fetchMock.reset();
@@ -16,7 +24,7 @@ describe('App.tsx', () => {
         fetchMock.mockReset();
     });
     it('renders header components', async () => {
-        fetchMock.mock(API_LINK, fetchResult);
+        fetchMock.mock(API_LINK, mockFetchResult);
         render(
             <TestProvider>
                 <App />
@@ -31,18 +39,8 @@ describe('App.tsx', () => {
         expect(textbox).toBeInTheDocument();
         expect(linkElement).toBeInTheDocument();
         expect(navElement).toBeInTheDocument();
-        await waitFor(() => {
-            expect(fetchMock).toHaveLastFetched(API_LINK);
-        });
     });
     it('renders content', () => {
-        const data: IStore = {
-            searchRobots: {
-                isPending: false,
-                robots: fetchResult,
-                searchField: '',
-            },
-        };
         const defaultStore = mockStore(data);
         render(
             <TestProvider store={defaultStore}>
@@ -54,4 +52,16 @@ describe('App.tsx', () => {
         expect(imgElements.length).toBe(10);
         expect(headingElements.length).toBe(20);
     });
+    // userEvent.type not working remarked until find out why
+    // it('handles user input changes', () => {
+    //     fetchMock.mock(API_LINK, mockFetchResult);
+    //     const store = mockStore(data);
+    //     const { debug } = render(
+    //         <TestProvider store={store}>
+    //             <App />
+    //         </TestProvider>,
+    //     );
+    //     userEvent.type(screen.getByRole('textbox'), 'clementin');
+    //     expect(screen.getByRole('textbox')).toHaveValue('clementin');
+    // });
 });

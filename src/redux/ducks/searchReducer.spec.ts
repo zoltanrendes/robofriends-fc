@@ -1,5 +1,5 @@
 import { ActionType } from 'redux-promise-middleware';
-import { fetchResult } from '../../mocks/mockFetchResult';
+import { mockFetchResult } from '../../mocks/mockFetchResult';
 import { ISearch } from '../../models/Search';
 import { CHANGE_SEARCHFIELD, REQUEST_ROBOTS } from './const';
 import { searchRobots } from './searchReducer';
@@ -23,9 +23,9 @@ describe('reducer', () => {
         expect(
             searchRobots(initialState, {
                 type: `${REQUEST_ROBOTS}_${ActionType.Fulfilled}`,
-                payload: fetchResult,
+                payload: mockFetchResult,
             }),
-        ).toEqual({ ...initialState, robots: fetchResult });
+        ).toEqual({ ...initialState, robots: mockFetchResult });
     });
     it(`should handle ${REQUEST_ROBOTS}_${ActionType.Pending}`, () => {
         expect(

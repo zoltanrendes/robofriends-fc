@@ -1,12 +1,17 @@
 import React from 'react';
 import { Jumbotron, Navbar, Row, Col, Nav, NavItem, Input } from 'reactstrap';
 import { BootstrapFill } from 'react-bootstrap-icons';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { searchActions } from '../redux/ducks/actions';
+import { IStore } from '../models/Store';
 import './Header.scss';
 
 export const Header: React.FC = () => {
     const dispatch = useDispatch();
+    const searchValue = useSelector<IStore, string>((state) => state.searchRobots?.searchField ?? '');
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(searchActions.changeSearchField(event.target.value));
+    };
     return (
         <>
             <Jumbotron fluid className="text-center my-1 py-1">
@@ -25,11 +30,11 @@ export const Header: React.FC = () => {
                         <Row className="justify-content-center">
                             <Col sm={6}>
                                 <Input
+                                    type="text"
                                     aria-label="Search"
                                     placeholder="Search for name"
-                                    onChange={(event) => {
-                                        dispatch(searchActions.changeSearchField(event.target.value));
-                                    }}
+                                    onChange={handleInputChange}
+                                    value={searchValue}
                                 />
                             </Col>
                         </Row>

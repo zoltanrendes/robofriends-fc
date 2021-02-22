@@ -1,4 +1,4 @@
-export const fetchResult = [
+export const mockFetchResult = [
     {
         id: 1,
         name: 'Leanne Graham',
