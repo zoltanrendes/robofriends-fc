@@ -1,0 +1,15 @@
+@font-face {
+    font-display: swap;
+    font-family: 'SEGA LOGO FONT';
+    font-style: normal;
+    font-weight: normal;
+    src: local('SEGA LOGO FONT'), url('../assets/SEGA.woff') format('woff');
+}
+
+.jumbotron {
+    .h2 {
+        font-family: 'SEGA LOGO FONT';
+        font-weight: 200;
+        color: rgb(21, 127, 251);
+    }
+}

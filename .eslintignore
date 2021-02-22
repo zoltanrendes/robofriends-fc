@@ -1,0 +1,5 @@
+build
+node_modules
+openapi
+serviceWorker.ts
+graphql-codegen
