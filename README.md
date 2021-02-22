@@ -10,6 +10,7 @@ The differences are:
 -   it uses testing-library instead of enzyme
 -   it uses Bootstrap instead of tachyons
 -   it uses redux-promise-middleware for async payloads in a single action
+-   it uses immutability-helper for updating state data without changing the original source
 
 TO-DO:
 
